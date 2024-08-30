@@ -11,7 +11,7 @@ class LogicClientAvatar:
         encoder.writeInt(1)
         encoder.writeByte(0) #Player is in clan
         
-        encoder.writeInt(11) #League
+        encoder.writeInt(16) #League
         
         encoder.writeInt(0)
         encoder.writeInt(10)
@@ -27,7 +27,7 @@ class LogicClientAvatar:
         encoder.writeInt(0)
         encoder.writeInt(0)
         encoder.writeInt(0)
-        encoder.writeInt(0)
+        encoder.writeInt(9999) #Trophies
         encoder.writeInt(0)
         encoder.writeInt(0)
         encoder.writeInt(0)
