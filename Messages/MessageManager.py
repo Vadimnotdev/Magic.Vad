@@ -17,13 +17,11 @@ class MessageManager:
             pass
         else:
             print("Unknown message type: " + str(messageType))
-
-        
-    def toString(self) -> str:
-        return "{0}-{1}".format(self.highInteger, self.lowInteger)
+    def __str__(self) -> str:
+        return f"{self.highInteger}-{self.lowInteger}"
 
     def onLoginMessage(self, message, loginMessage: LoginMessage):
-        print(f"[MessageManager] Logged in! AccountId: {loginMessage.accountId.toString()} PassToken: {loginMessage.passToken} ClientMajorVersion: {loginMessage.ClientMajorVersion} ClientBuild: {loginMessage.ClientBuild} ResourceSha: {loginMessage.ResourceSha}")
+        print(f"[MessageManager] Logged in! AccountId: {loginMessage.accountId.__str__()} PassToken: {loginMessage.passToken} ClientMajorVersion: {loginMessage.ClientMajorVersion} ClientBuild: {loginMessage.ClientBuild} ResourceSha: {loginMessage.ResourceSha}")
 
         self.messaging.sendMessage(LoginOkMssage())
         self.messaging.sendMessage(OwnHomeDataMessage())

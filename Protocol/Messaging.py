@@ -29,16 +29,6 @@ class Messaging:
         self.client.send(fullPayload)
         print("[Messaging] Sent: " + str(message.getMessageType()))
     
-    def recv(self, a):
-        data = bytearray()
-        while len(data) < a:
-            packet = self.client.recv(a - len(data))
-            if not packet:
-                print("Data is NULL")
-                return b''
-            data.extend(packet)
-        return data
-    
     @staticmethod
     def readHeader(buffer: bytearray):
         messageType = buffer[1] | (buffer[0] << 8)
