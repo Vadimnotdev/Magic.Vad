@@ -1,0 +1,11 @@
+BYTESTREAM:
+(this + 24) = bitIndex
+(this + 28) = buffer (ByteArray)
+(this + 16) = offset
+(this + 20) = length
+(this + 32) = BufferLength
+
+CHECKSUMENCODER:
+(this + 2) or +8 = checksum
+(this + 3) or 0xC or +12 = snapshotChecksum
+(this + 4) = enabled
