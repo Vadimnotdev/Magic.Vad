@@ -1,12 +1,11 @@
 import socket
-import time
 import threading
 import traceback
-from Protocol.Messaging import Messaging
-from RC4Encrypter.RC4Encrypter import RC4Encrypter
-from Messages.PiranhaMessage import PiranhaMessage
-from Messages.LogicMagicMessageFactory import LogicMagicMessageFactory
-from Messages.MessageManager import MessageManager
+from MagicVadServer.Protocol.Messaging import Messaging
+from MagicVadTitan.Encryption.RC4Encrypter import RC4Encrypter
+from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
+from MagicVadLogic.LogicMagicMessageFactory import LogicMagicMessageFactory
+from MagicVadServer.Protocol.MessageManager import MessageManager
 
 class Connection(threading.Thread):
     def __init__(self, socket: socket.socket, address):

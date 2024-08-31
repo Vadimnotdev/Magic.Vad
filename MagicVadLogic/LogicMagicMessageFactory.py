@@ -1,5 +1,5 @@
-from Messages.Login.LoginMessage import LoginMessage
-from Messages.EndClientTurnMessage import EndClientTurnMessage
+from MagicVadLogic.Message.Account.LoginMessage import LoginMessage
+from MagicVadServer.Protocol.EndClientTurnMessage import EndClientTurnMessage
 class LogicMagicMessageFactory:
     messages = {
         10101: LoginMessage,

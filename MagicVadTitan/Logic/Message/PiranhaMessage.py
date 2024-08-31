@@ -1,4 +1,4 @@
-from DataStream.ByteStream import ByteStream
+from MagicVadTitan.Logic.DataStream.ByteStream import ByteStream
 class PiranhaMessage:
     def __init__(self, messageVersion) -> None:
         self.stream = ByteStream(10)

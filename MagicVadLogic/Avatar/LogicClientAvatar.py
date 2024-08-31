@@ -1,6 +1,6 @@
-from DataStream.ChecksumEncoder import ChecksumEncoder
-from Logic.LogicBase import LogicBase
-from Logic.LogicLong import LogicLong
+from MagicVadTitan.Logic.DataStream.ChecksumEncoder import ChecksumEncoder
+from MagicVadLogic.Base.LogicBase import LogicBase
+from MagicVadTitan.Logic.Math.LogicLong import LogicLong
 class LogicClientAvatar:
  def encode(self, encoder: ChecksumEncoder):
         
@@ -8,8 +8,8 @@ class LogicClientAvatar:
         encoder.writeInt(0) #HighID
         encoder.writeInt(1) #LowID
         encoder.writeInt(0)
-        encoder.writeInt(1)
-        encoder.writeByte(0) #Player is in clan
+        encoder.writeInt(1) #AllianceId
+        encoder.writeBoolean(0) #Player is in clan
         
         encoder.writeInt(16) #League
         

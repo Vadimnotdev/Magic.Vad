@@ -1,5 +1,5 @@
 import socket
-from Protocol.Connection import Connection
+from MagicVadServer.Network.Connection import Connection
 class TcpNetwork:
     def __init__(self, address) -> None:
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,7 +17,7 @@ class TcpNetwork:
     ⠀⠀⠀⠀⠀⢸⡇⠀⠀⢻⣿⣿⣿⠇⠀⢸⣿⣿⣿⡇⠀⠀⣤⣾⣿⠏⣿⣿⣿⠀⠀⠻⢿⣿⣦⣼⣿⡿⠃⠀⢸⣿⣿⡇⠀⣿⣿⣿⣆⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀ ⠹⣿⣿⣿⣿⠃⠀⠀⠀⣤⣾⣿⠋⣿⣿⣿⠀⠸⣿⣿⣿⠀⠀⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⣸⣿⡀⠀⠀⢿⣿⠏⠀⠀⢸⣿⣿⣿⣇⠀⢸⣿⣿⣿⣴⣿⣿⣿⣤⡀⣾⣿⣯⣭⣥⣤⣄⡀⠀⣸⣿⣿⣧⠀⠸⣿⣿⣿⣦⣤⣾⠇⢸⣿⣿⣷⠀⠀⠀⠀⠀⠹⣿⣿⠃⠀⠀⠀⢸⣿⣿⣷⣴⣿⣿⣿⣤⠀⢿⣿⣿⣤⣤⣿⣿⣿⣇⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠛⠛⠛⠛⠛⠀⠀⠛⠀⠀⠛⠛⠛⠛⠛⠛⠛⠀⠙⠛⠛⠁⠈⠛⠛⠋⠀⣻⣿⣿⣿⣿⣿⣿⣿⡞⠛⠛⠛⠛⠃⠀⠈⠛⠻⠟⠛⠁⠀⠈⠛⠛⠃⠀⠀⠀⠀⠀⠀⠙⠃⠀⠀⠀⠀⠀⠛⠛⠛⠁⠘⠛⠛⠁⠀⠀⠙⠛⠟⠛⠛⠛⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⣿⣿⣍⣉⣉⣉⣽⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣍⣉⣉⣉⣽⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
  
                                                   
     """)
@@ -26,4 +26,4 @@ class TcpNetwork:
             self.server.listen()
             connection, addr = self.server.accept()
             print(f"New connection from {addr[0]}:{addr[1]}")
-            Connection(connection, addr).start()
+            Connection.Connection(connection, addr).start()

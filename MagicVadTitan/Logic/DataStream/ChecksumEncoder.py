@@ -1,4 +1,4 @@
-from Logic import LogicLong
+from MagicVadTitan.Logic.Math import LogicLong
 class ChecksumEncoder:
     def __init__(self) -> None:
         self.checksum = 0
@@ -30,7 +30,7 @@ class ChecksumEncoder:
             self.checksum = len(value) + 28
         else:
             self.checksum = 27
-        self.checksum + self.rotateRight(self.checksum, 31) + 38
+        self.checksum + self.rotateRight(self.checksum, 31)
     
     def writeStringReference(self, value):
         self.checksum = len(value) + self.rotateRight(self.checksum, 31) + 38

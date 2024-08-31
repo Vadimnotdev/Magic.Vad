@@ -1,6 +1,6 @@
-from Messages.PiranhaMessage import PiranhaMessage
-from Logic.LogicClientAvatar import LogicClientAvatar
-from Logic.LogicClientHome import LogicClientHome
+from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
+from MagicVadLogic.Avatar.LogicClientAvatar import LogicClientAvatar
+from MagicVadLogic.Home.LogicClientHome import LogicClientHome
 class OwnHomeDataMessage(PiranhaMessage):
     def __init__(self) -> None:
         super().__init__(0)

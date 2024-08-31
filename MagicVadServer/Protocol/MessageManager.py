@@ -1,8 +1,8 @@
-from Messages.Login.LoginMessage import LoginMessage
-from Messages.PiranhaMessage import PiranhaMessage
-from Protocol.Messaging import Messaging
-from Messages.Login.LoginOkMessage import LoginOkMssage
-from Messages.OwnHomeDataMessage import OwnHomeDataMessage
+from MagicVadLogic.Message.Account.LoginMessage import LoginMessage
+from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
+from MagicVadServer.Protocol.Messaging import Messaging
+from MagicVadLogic.Message.Account.LoginOkMessage import LoginOkMssage
+from MagicVadLogic.Message.Home.OwnHomeDataMessage import OwnHomeDataMessage
 
 class MessageManager:
     def __init__(self, messaging: Messaging) -> None:

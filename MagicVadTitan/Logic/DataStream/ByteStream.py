@@ -1,5 +1,5 @@
-from Logic.LogicLong import LogicLong
-from DataStream.ChecksumEncoder import ChecksumEncoder
+from MagicVadTitan.Logic.Math.LogicLong import LogicLong
+from MagicVadTitan.Logic.DataStream.ChecksumEncoder import ChecksumEncoder
 class ByteStream(ChecksumEncoder):
     def __init__(self, capacity: int) -> None:
         super().__init__()

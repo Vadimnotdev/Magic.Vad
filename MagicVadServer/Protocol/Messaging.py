@@ -1,5 +1,5 @@
-from Messages.PiranhaMessage import PiranhaMessage
-from RC4Encrypter.RC4Encrypter import RC4Encrypter
+from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
+from MagicVadTitan.Encryption.RC4Encrypter import RC4Encrypter
 import socket
 
 class Messaging:

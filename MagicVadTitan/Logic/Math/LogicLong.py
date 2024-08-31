@@ -1,5 +1,5 @@
-from DataStream import ByteStream
-from DataStream import ChecksumEncoder
+from MagicVadTitan.Logic.DataStream import ByteStream
+from MagicVadTitan.Logic.DataStream import ChecksumEncoder
 class LogicLong:
     def __init__(self, lowerInt=0, higherInt=0):
         self.higherInt = higherInt

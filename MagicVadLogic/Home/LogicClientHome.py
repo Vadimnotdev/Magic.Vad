@@ -1,6 +1,6 @@
-from DataStream.ChecksumEncoder import ChecksumEncoder
-from Logic.LogicLong import LogicLong
-from Logic.LogicBase import LogicBase
+from MagicVadTitan.Logic.DataStream.ChecksumEncoder import ChecksumEncoder
+from MagicVadTitan.Logic.Math.LogicLong import LogicLong
+from MagicVadLogic.Base.LogicBase import LogicBase
 class LogicClientHome(LogicBase):
     def __init__(self) -> None:
         super().__init__()

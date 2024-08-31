@@ -1,4 +1,4 @@
-from Messages.PiranhaMessage import PiranhaMessage
+from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
 class EndClientTurnMessage(PiranhaMessage):
     def __init__(self) -> None:
         super().__init__(0)
