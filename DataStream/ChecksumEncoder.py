@@ -21,15 +21,6 @@ class ChecksumEncoder:
     def isCheckSumEnabled(self):
         return self.enabled
     
-    def enableCheckSum(self, enable):
-        if not self.enabled or enable:
-            if not self.enabled and enable == True:
-                self.checksum = self.snapshotChecksum
-                self.enabled = enable
-        
-        else:
-            self.snapshotChecksum = self.checksum
-            self.enabled = False
     
     def resetCheckSum(self):
         self.checksum = 0
