@@ -1,4 +1,4 @@
-from MagicVadTitan.Logic.Math import LogicLong
+from MagicVadTitan.Logic.Math.LogicLong import LogicLong
 class ChecksumEncoder:
     def __init__(self) -> None:
         self.checksum = 0
@@ -9,7 +9,8 @@ class ChecksumEncoder:
         if not self.enabled or enable:
             if not self.enabled and enable == True:
                 self.checksum = self.snapshotChecksum
-                self.enabled = enable
+            
+            self.enabled = enable
         
         else:
             self.snapshotChecksum = self.checksum
@@ -30,17 +31,19 @@ class ChecksumEncoder:
             self.checksum = len(value) + 28
         else:
             self.checksum = 27
-        self.checksum + self.rotateRight(self.checksum, 31)
+        
+        self.checksum += self.rotateRight(self.checksum, 31)
+
     
     def writeStringReference(self, value):
         self.checksum = len(value) + self.rotateRight(self.checksum, 31) + 38
     
     def writeBoolean(self, value: bool):
-        if value == True:
-            self.checksum + 13
+        if value:
+            self.checksum = 13 + self.rotateRight(self.checksum, 31)
         else:
-            self.checksum +7
-        self.checksum + self.rotateRight(self.checksum, 31)
+            self.checksum = 7 + self.rotateRight(self.checksum, 31)
+
 
     def writeInt(self, value: int):
         self.checksum = value + self.rotateRight(self.checksum, 31) + 9
@@ -51,12 +54,14 @@ class ChecksumEncoder:
     def writeShort(self, value: int):
         self.checksum = value + self.rotateRight(self.checksum, 31) + 19
     
-    def writeBytes(self, value: bytes, length):
+    def writeBytes(self, value: bytes, length: int):
         if value is not None:
             self.checksum = length + 28
         else:
             self.checksum = 27
-        self.checksum = self.checksum + self.rotateRight(self.checksum, 31)
+        
+        self.checksum = (self.checksum + (self.checksum >> 31)) | (self.checksum << (32 - 31))
+
     
     def getCheckSum(self):
         return self.checksum
