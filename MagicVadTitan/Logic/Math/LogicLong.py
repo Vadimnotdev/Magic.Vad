@@ -1,41 +1,40 @@
 class LogicLong:
-    def __init__(self, highInteger: int = 0, lowInteger: int = 0) -> None:
-        self.highInteger = highInteger
-        self.lowInteger = lowInteger
+    def __init__(self, lowerInt=0, higherInt=0):
+        self.higherInt = higherInt
+        self.lowerInt = lowerInt
 
-    def decode(self, stream) -> None:
-        self.highInteger = stream.readInt()
-        self.lowInteger = stream.readInt()
+    def decode(self, stream): #Wisedev told me choose Stream name for arg
+        self.higherInt = stream.readInt()
+        self.lowerInt = stream.readInt()
 
-    def encode(self, encoder) -> None:
-        encoder.writeInt(self.highInteger)
-        encoder.writeInt(self.lowInteger)
+    def encode(self, encoder):
+        encoder.writeInt(self.higherInt)
+        encoder.writeInt(self.lowerInt)
     
     def isZero(self):
         result = False
-        if self.higherInteger and self.lowerInteger == 0:
+        if self.higherInt and self.lowerInt == 0:
             return True
         else:
             return result
     
     def hashCode(self):
-        return self.lowerInteger + 31 * self.higherInteger
+        return self.lowerInt + 31 * self.higherInt
     
     def equals(self, logiclong):
-        if self.higherInteger == logiclong.higherInteger and self.lowerInteger == logiclong.lowerInteger:
+        if self.higherInt == logiclong.higherInt and self.lowerInt == logiclong.lowerInt:
             return True
         else:
             return False
         
     def clone(self):
-        return LogicLong(self.lowerInteger, self.higherInteger)
+        return LogicLong(self.lowerInt, self.higherInt)
     
     def getHigherInt(self):
-        return self.higherInteger
+        return self.higherInt
     
     def getLowerInt(self):
-        return self.lowerInteger
+        return self.lowerInt
     
-    
-    def toString(self) -> str:
-        return "LogicLong({0}-{1})".format(self.higherInteger, self.lowerInteger)
+    def __str__(self) -> str:
+        return f"{self.higherInt}-{self.lowerInt}"
