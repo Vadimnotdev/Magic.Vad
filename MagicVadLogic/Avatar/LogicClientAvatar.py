@@ -31,7 +31,6 @@ class LogicClientAvatar():
         self.attackRating = 0
         self.attackFactor = 0
         self.score = 999
-        #self.duelScore = 0
         self.attackWincount = 0
         self.attackLoseCount = 0
         self.defenseWinCount = 0
@@ -55,7 +54,7 @@ class LogicClientAvatar():
         encoder.writeInt(0)
         encoder.writeInt(0)
         encoder.writeInt(0)
-        encoder.writeInt(5)
+        encoder.writeInt(0)
 
         encoder.writeString(self.name)
         encoder.writeString(self.facebookId)
