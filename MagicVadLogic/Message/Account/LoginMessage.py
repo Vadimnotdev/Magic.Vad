@@ -9,7 +9,7 @@ class LoginMessage(PiranhaMessage):
         self.ClientBuild = -1
         self.PreferredLanguage = 0
         self.isAndroid = 0
-        self.passToken = self.stream.readString()
+        self.passToken: str = ""
     
     def getAndroidID(self):
         return self.AndroidID
