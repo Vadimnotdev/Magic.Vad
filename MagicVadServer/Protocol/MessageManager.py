@@ -3,6 +3,7 @@ from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
 from MagicVadServer.Protocol.Messaging import Messaging
 from MagicVadLogic.Message.Account.LoginOkMessage import LoginOkMssage
 from MagicVadLogic.Message.Home.OwnHomeDataMessage import OwnHomeDataMessage
+from MagicVadLogic.Profile.AvatarProfileMessage import AvatarProfileMessage
 
 class MessageManager:
     def __init__(self, messaging: Messaging) -> None:
@@ -13,6 +14,9 @@ class MessageManager:
 
         if messageType == 10101:
             self.onLoginMessage(self, message)
+        
+        elif messageType == 14325:
+            self.messaging.sendMessage(AvatarProfileMessage())
         elif messageType == 14102:
             pass
         else:
