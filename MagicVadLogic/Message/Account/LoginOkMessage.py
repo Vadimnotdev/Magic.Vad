@@ -1,6 +1,6 @@
 from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
 from MagicVadTitan.Logic.Math.LogicLong import LogicLong
-class LoginOkMssage(PiranhaMessage):
+class LoginOkMessage(PiranhaMessage):
     def __init__(self):
         super().__init__(0)
     

@@ -13,7 +13,6 @@ class LogicMagicMessageFactory:
             if (type(messages[messageType]) is None):
                 pass
             else:
-                print("[LogicMagicMessageFactory]", str(messageType) + " created")
                 return messages[messageType]()
         else:
             return None
