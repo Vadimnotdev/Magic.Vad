@@ -1,11 +1,13 @@
 from MagicVadLogic.Message.Account.LoginMessage import LoginMessage
 from MagicVadServer.Protocol.EndClientTurnMessage import EndClientTurnMessage
 from MagicVadLogic.Profile.AskForAvatarProfileMessage import AskForAvatarProfileMessage
+from MagicVadLogic.GlobalChat.SendGlobalChatLineMessage import SendGlobalChatLineMessage
 class LogicMagicMessageFactory:
     messages = {
         10101: LoginMessage,
         14102: EndClientTurnMessage,
-        14325: AskForAvatarProfileMessage
+        14325: AskForAvatarProfileMessage,
+        14715: SendGlobalChatLineMessage
         }
     def createMessageByType(messageType):
         messages = LogicMagicMessageFactory.messages

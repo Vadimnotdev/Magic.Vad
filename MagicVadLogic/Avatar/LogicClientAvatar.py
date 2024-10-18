@@ -1,6 +1,8 @@
 from MagicVadTitan.Logic.DataStream.ChecksumEncoder import ChecksumEncoder
 from MagicVadLogic.Base.LogicBase import LogicBase
 from MagicVadTitan.Logic.Math.LogicLong import LogicLong
+
+
 class LogicClientAvatar():
     def __init__(self) -> None:
         self.resources = {
@@ -8,23 +10,24 @@ class LogicClientAvatar():
             3000002: 99999,  # Elixir
             3000003: 99999   # Dark Elixir
         }
-        self.tutorialSteps = list(range(21000000, 21000013)) # tutorial steps list
-        self.idFirst = 0
-        self.idSecond = 1
+        self.tutorialSteps = list(
+            range(21000000, 21000013))  # tutorial steps list
+        self.avatarId = LogicLong(0, 1)
+        self.homeId = LogicLong(0, 1)
         self.currentHomeIdFirst = 0
         self.currentHomeIdSecond = 1
-        self.allianceIdFirst = 1
-        self.allianceIdSecond = 1
-        
+
+        self.isInAlliance = False
+        self.allianceId = None
         self.allianceName = None
-        self.allianceBadgeId = 0
+        self.allianceBadgeId = None
         self.allianceRole = 0
         self.allianceExpLevel = 0
-        
-        self.leagueType = 16
-        self.name = "vadim_not_dev"
+
+        self.avatarLeagueType = 16
+        self.avatarName = "vadim_not_dev"
         self.facebookId = None
-        self.expLevel = 99
+        self.avatarExpLevel = 99
         self.expPoints = 999
         self.diamonds = 99999
         self.freeDiamonds = 0
@@ -37,29 +40,25 @@ class LogicClientAvatar():
         self.defenseLoseCount = 0
         self.nameSetByUser = False
         self.allianceChatFilter = False
-    
-    def encode(self, encoder: ChecksumEncoder):
-        encoder.writeInt(0) #LogicDataVersion
-        encoder.writeInt(0) #HighID
-        encoder.writeInt(1) #LowID
-        encoder.writeInt(0) #HighAllianceId
-        encoder.writeInt(1) #LowAllianceId
 
-        
+    def encode(self, encoder: ChecksumEncoder):
+        encoder.writeInt(0)  # LogicDataVersion
+        encoder.writeLong(self.avatarId)  # AvatarID
+        encoder.writeLong(self.homeId)  # HomeId
+
         encoder.writeBoolean(False)
 
+        encoder.writeInt(self.avatarLeagueType)
 
-        encoder.writeInt(self.leagueType)
-
         encoder.writeInt(0)
         encoder.writeInt(0)
         encoder.writeInt(0)
         encoder.writeInt(0)
 
-        encoder.writeString(self.name)
+        encoder.writeString(self.avatarName)
         encoder.writeString(self.facebookId)
-        
-        encoder.writeInt(self.expLevel)
+
+        encoder.writeInt(self.avatarExpLevel)
         encoder.writeInt(self.expPoints)
         encoder.writeInt(self.diamonds)
         encoder.writeInt(self.freeDiamonds)
@@ -74,12 +73,12 @@ class LogicClientAvatar():
         encoder.writeInt(0)
 
         encoder.writeInt(0)
-        
+
         encoder.writeInt(len(self.resources))
         for resource_id, amount in self.resources.items():
             encoder.writeInt(resource_id)
             encoder.writeInt(amount)
-        
+
         encoder.writeInt(0)
         encoder.writeInt(0)
         encoder.writeInt(0)
@@ -89,7 +88,7 @@ class LogicClientAvatar():
         encoder.writeInt(0)
         encoder.writeInt(0)
 
-        encoder.writeInt(len(self.tutorialSteps)) # skip tutorial
+        encoder.writeInt(len(self.tutorialSteps))  # skip tutorial
         for item in self.tutorialSteps:
             encoder.writeInt(item)
 

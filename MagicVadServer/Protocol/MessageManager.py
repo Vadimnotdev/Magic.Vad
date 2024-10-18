@@ -5,6 +5,8 @@ from MagicVadLogic.Message.Account.LoginOkMessage import LoginOkMessage
 from MagicVadLogic.Message.Home.OwnHomeDataMessage import OwnHomeDataMessage
 from MagicVadLogic.Profile.AvatarProfileMessage import AvatarProfileMessage
 from MagicVadServer.Protocol.EndClientTurnMessage import EndClientTurnMessage
+from MagicVadLogic.GlobalChat.GlobalChatLineMessage import GlobalChatLineMessage
+from MagicVadLogic.GlobalChat.SendGlobalChatLineMessage import SendGlobalChatLineMessage
 class MessageManager:
     def __init__(self, messaging: Messaging) -> None:
         self.messaging = messaging
@@ -19,6 +21,9 @@ class MessageManager:
             self.messaging.sendMessage(AvatarProfileMessage())
         elif messageType == 14102:
             pass
+        elif messageType == 14715:
+            self.onSendGlobalChatMessage(message)
+
         else:
             print("Unknown message type: " + str(messageType))
     def __str__(self) -> str:
@@ -37,3 +42,9 @@ class MessageManager:
         else:
             print("Received message of wrong type for onLoginMessage")
 
+    def onSendGlobalChatMessage(self, sendGlobalChatLineMessage: SendGlobalChatLineMessage):
+        print(f"New message: {sendGlobalChatLineMessage.getMessage()}")
+
+        globalChatLineMessage = GlobalChatLineMessage()
+        globalChatLineMessage.setMessage(sendGlobalChatLineMessage.getMessage())
+        self.messaging.sendMessage(globalChatLineMessage)
