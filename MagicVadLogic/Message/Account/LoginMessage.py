@@ -1,41 +1,29 @@
 from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
 from MagicVadTitan.Logic.Math.LogicLong import LogicLong
+from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
+
+
 class LoginMessage(PiranhaMessage):
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__(0)
-        self.AccountId: LogicLong = LogicLong()
-        self.AndroidID = ""
-        self.ClientMajorVersion = -1
-        self.ClientBuild = -1
-        self.PreferredLanguage = 0
-        self.isAndroid = 0
-        self.passToken: str = ""
-    
-    def getAndroidID(self):
-        return self.AndroidID
-    
-    def getClientBuild(self):
-        return self.ClientBuild
-    
-    def getClientMajorVersion(self):
-        return self.ClientMajorVersion
+        self.avatarHighId = 0
+        self.avatarLowId = 0
+        self.passToken = ""
+        self.ClientMajorVersion = 0
+        self.ClientBuild = 0
+        self.ResourceSha = ""
+        self.UDID = ""
+        self.OpenUDID = ""
+        self.MacAddress = ""
+        self.avatarId = LogicLong(self.avatarHighId, self.avatarLowId)
     
     def getMessageType(self) -> int:
         return 10101
     
-    def getPreferredLanguage(self):
-        return self.PreferredLanguage
-    
-    def getServiceNodeType():
-        return 1
-    
-    def isAndroid(self):
-        return self.isAndroid
-
-    
     def decode(self):
         super().decode()
-        self.accountId = self.stream.readLong()
+        self.avatarHighId = self.stream.readInt()
+        self.avatarLowId = self.stream.readInt()
         self.passToken = self.stream.readString()
         self.ClientMajorVersion = self.stream.readInt()
         self.stream.readInt()
@@ -45,3 +33,4 @@ class LoginMessage(PiranhaMessage):
         self.OpenUDID = self.stream.readString()
         self.MacAddress = self.stream.readString()
         self.MacAddress = self.stream.readString()
+        self.avatarId = LogicLong(self.avatarHighId, self.avatarLowId)

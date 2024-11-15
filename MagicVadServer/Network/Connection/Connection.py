@@ -6,14 +6,16 @@ from MagicVadTitan.Encryption.RC4Encrypter import RC4Encrypter
 from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
 from MagicVadLogic.LogicMagicMessageFactory import LogicMagicMessageFactory
 from MagicVadServer.Protocol.MessageManager import MessageManager
+from MagicVadServer.Database.Databasemanager import *
 
 class Connection(threading.Thread):
-    def __init__(self, socket: socket.socket, address):
+    def __init__(self, socket: socket.socket, address, database: DataBase):
         super().__init__()
         self.client = socket
         self.address = address
+        self.database = database
         self.messaging = Messaging(self.client)
-        self.manager = MessageManager(self.messaging)
+        self.manager = MessageManager(self.messaging,)
         self.rc4_encrypter = RC4Encrypter()
     
     def recv(self, n) -> bytearray:
@@ -43,8 +45,7 @@ class Connection(threading.Thread):
                         message.getByteStream().setByteArray(decPayload, encodingLength, len(decPayload))
 
                         message.decode()
-
-                        self.manager.receiveMessage(message)
+                        self.manager.receiveMessage(message, self.database)
                     else:
                         print(f"[Connection] Ignoring message of unknown type {messageType}")
 

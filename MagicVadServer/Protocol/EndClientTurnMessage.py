@@ -1,5 +1,7 @@
 from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
 from MagicVadTitan.Logic.Debug.Debugger import Debugger
+
+
 class EndClientTurnMessage(PiranhaMessage):
     def __init__(self) -> None:
         super().__init__(0)
@@ -9,7 +11,7 @@ class EndClientTurnMessage(PiranhaMessage):
 
     def getMessageType(self) -> int:
         return 14102
-    
+
     def decode(self):
         super().decode()
         self.SubTick = self.stream.readInt()
@@ -21,7 +23,7 @@ class EndClientTurnMessage(PiranhaMessage):
                 self.commands = []
 
                 while array_size > 0:
-                    command = None #LogicCommandManager.DecodeCommand(self.stream)
+                    command = None  # LogicCommandManager.decode(self.stream)
 
                     if command is None:
                         break
@@ -29,4 +31,5 @@ class EndClientTurnMessage(PiranhaMessage):
                     self.commands.append(command)
                     array_size -= 1
         else:
-            Debugger.error(f"EndClientTurn::decode() command count is too high! ({array_size})")
+            Debugger.error(
+                f"EndClientTurn::decode() command count is too high! ({array_size})")

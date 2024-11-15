@@ -1,19 +1,27 @@
 from MagicVadTitan.Logic.Message.PiranhaMessage import PiranhaMessage
 from MagicVadTitan.Logic.Math.LogicLong import LogicLong
-
+from MagicVadServer.Database.Databasemanager import *
 class GlobalChatLineMessage(PiranhaMessage):
-    def __init__(self) -> None:
+    def __init__(self, database: DataBase) -> None:
         super().__init__(0)
         self.message = ""
-        self.avatarName = "vadim_not_dev"
-        self.avatarExpLevel = 99
-        self.avatarLeagueType = 16
-        self.avatarId = LogicLong(0, 1)
-        self.homeId = LogicLong(0, 1)
+        self.database = database
+
+
+    def load_account_data(self):
+        self.database.load_account()
+        self.avatarHighId = self.database.avatarHighId
+        self.avatarLowId = self.database.avatarLowId
+        self.homeHighId = self.database.homeHighId
+        self.homeLowId = self.database.homeLowId
+        self.avatarLeagueType = self.database.avatarLeagueType
+        self.avatarName = self.database.avatarName
+        self.avatarExpLevel = self.database.avatarExpLevel
+        self.score = self.database.score
         self.allianceId = None
-        self.isInAlliance = False
         self.allianceName = None
         self.allianceBadgeId = None
+        self.isInAlliance = None
 
     def getMessageType(self) -> int:
         return 24715
@@ -23,12 +31,15 @@ class GlobalChatLineMessage(PiranhaMessage):
 
     def encode(self):
         super().encode()
+        self.load_account_data()
         self.stream.writeString(self.message)
         self.stream.writeString(self.avatarName)
         self.stream.writeInt(self.avatarExpLevel)
         self.stream.writeInt(self.avatarLeagueType)
-        self.stream.writeLong(self.avatarId)
-        self.stream.writeLong(self.homeId)
+        self.stream.writeInt(self.avatarLowId)
+        self.stream.writeInt(self.avatarHighId)
+        self.stream.writeInt(self.avatarLowId)
+        self.stream.writeInt(self.homeHighId)
         if self.isInAlliance == True:
             self.stream.writeBoolean(True)
             self.stream.writeLong(self.allianceId)

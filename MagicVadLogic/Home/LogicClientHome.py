@@ -1,20 +1,34 @@
 from MagicVadTitan.Logic.DataStream.ChecksumEncoder import ChecksumEncoder
 from MagicVadTitan.Logic.Math.LogicLong import LogicLong
 from MagicVadLogic.Base.LogicBase import LogicBase
+from MagicVadServer.Database.Databasemanager import *
 class LogicClientHome(LogicBase):
-    def __init__(self) -> None:
+    def __init__(self, database: DataBase):
         super().__init__()
-        self.ChangeListener = 0
-        self.getId = 0
-        self.HomeJSON = 0
-        self.ShieldDurationSeconds = 0
-        self.DefenseRating = 0
-        self.DefenseRating = 0
-    
+        self.database = database
+        self.homeHighId = 0
+        self.homeLowId = 0
+        self.homeJSON = ""
+        self.shieldDurationSeconds = 0
+        self.defenseRating = 0
+        self.defenseKFactor = 0
+        Account.initialize_avatar_id_counter()
+
+    def load_account_data(self):
+        self.database.load_account()
+        self.homeHighId = self.database.homeHighId
+        self.homeLowId = self.database.homeLowId
+        self.homeJSON = self.database.homeJSON
+        self.shieldDurationSeconds = self.database.shieldDurationSeconds
+        self.defenseRating = self.database.defenseRating
+        self.defenseKFactor = self.database.defenseKFactor
+
     def encode(self, encoder: ChecksumEncoder):
         super().encode(encoder)
-        encoder.writeLong(LogicLong(1, 1)) #id
-        encoder.writeString("""{"buildings":[{"data":1000001,"lvl":10,"x":21,"y":20},{"data":1000004,"lvl":0,"x":20,"y":16,"res_time":8992},{"data":1000000,"lvl":0,"x":26,"y":19,"units":[],"storage_type":0},{"data":1000015,"lvl":0,"x":18,"y":20},{"data":1000014,"lvl":0,"locked":true,"x":25,"y":32}],"obstacles":[{"data":8000007,"x":5,"y":13},{"data":8000007,"x":15,"y":29},{"data":8000008,"x":7,"y":7},{"data":8000005,"x":29,"y":4},{"data":8000006,"x":15,"y":37},{"data":8000000,"x":20,"y":4},{"data":8000008,"x":15,"y":22},{"data":8000005,"x":37,"y":18},{"data":8000007,"x":6,"y":4},{"data":8000003,"x":26,"y":10},{"data":8000004,"x":21,"y":9},{"data":8000008,"x":32,"y":21},{"data":8000005,"x":20,"y":36},{"data":8000003,"x":29,"y":34},{"data":8000005,"x":5,"y":29},{"data":8000005,"x":8,"y":10},{"data":8000005,"x":5,"y":17},{"data":8000002,"x":4,"y":33},{"data":8000002,"x":5,"y":21},{"data":8000002,"x":10,"y":32},{"data":8000008,"x":5,"y":37},{"data":8000001,"x":9,"y":4},{"data":8000001,"x":13,"y":31},{"data":8000001,"x":7,"y":35},{"data":8000007,"x":4,"y":9},{"data":8000004,"x":9,"y":23},{"data":8000004,"x":6,"y":26},{"data":8000003,"x":35,"y":21},{"data":8000005,"x":32,"y":28},{"data":8000005,"x":34,"y":13},{"data":8000001,"x":14,"y":18},{"data":8000001,"x":35,"y":5},{"data":8000012,"x":24,"y":30},{"data":8000012,"x":31,"y":10},{"data":8000010,"x":26,"y":38},{"data":8000010,"x":14,"y":5},{"data":8000013,"x":34,"y":33},{"data":8000013,"x":13,"y":9},{"data":8000014,"x":10,"y":17},{"data":8000014,"x":24,"y":7},{"data":8000006,"x":36,"y":26},{"data":8000011,"x":23,"y":34},{"data":8000011,"x":24,"y":37},{"data":8000000,"x":27,"y":35},{"data":8000000,"x":25,"y":35},{"data":8000000,"x":26,"y":30},{"data":8000007,"x":23,"y":32},{"data":8000001,"x":28,"y":31},{"data":8000014,"x":28,"y":29}],"traps":[],"decos":[],"respawnVars":{"secondsFromLastRespawn":0,"respawnSeed":1529463799,"obstacleClearCounter":0},"cooldowns":[]}""")
-        encoder.writeInt(0) # ShieldDurationSeconds
-        encoder.writeInt(0)  #DefenseRating
-        encoder.writeInt(0) # DefenseKFactor
+        self.load_account_data()
+        encoder.writeInt(self.homeHighId)
+        encoder.writeInt(self.homeLowId)
+        encoder.writeString(self.homeJSON)
+        encoder.writeInt(self.shieldDurationSeconds) # ShieldDurationSeconds
+        encoder.writeInt(self.defenseRating) # DefenseRating
+        encoder.writeInt(self.defenseKFactor) # DefenseKFactor
